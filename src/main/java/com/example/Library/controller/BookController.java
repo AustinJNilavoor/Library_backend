@@ -1,6 +1,7 @@
 package com.example.Library.controller;
 
 import com.example.Library.model.Book;
+import com.example.Library.repository.AuthorRepository;
 import com.example.Library.repository.BookRepository;
 
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,12 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
 
-    private final BookRepository repo;
+    private final BookRepository bookRepo;
+    private final AuthorRepository authorRepo;
 
-    public BookController(BookRepository repo) {
-        this.repo = repo;
+    public BookController(BookRepository bookRepo,AutherRepository authorRepo) {
+        this.bookRepo = bookRepo;
+        this.authorRepo = null;
     }
 
     @GetMapping

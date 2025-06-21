@@ -10,7 +10,7 @@ public class Book {
     private Long id;
 
     private String title;
-    private String author;
+    private String author_id;
 
     public Long getId() {
         return id;
@@ -20,8 +20,8 @@ public class Book {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return author_id;
     }
 
     public void setId(Long id) {
@@ -32,7 +32,7 @@ public class Book {
         this.title = title;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorId(String author_id) {
+        this.author_id = author_id;
     }
 }
