@@ -17,9 +17,9 @@ public class BookController {
     private final BookRepository bookRepo;
     private final AuthorRepository authorRepo;
 
-    public BookController(BookRepository bookRepo,AutherRepository authorRepo) {
+    public BookController(BookRepository bookRepo,AuthorRepository authorRepo) {
         this.bookRepo = bookRepo;
-        this.authorRepo = null;
+        this.authorRepo = authorRepo;
     }
 
     @GetMapping
