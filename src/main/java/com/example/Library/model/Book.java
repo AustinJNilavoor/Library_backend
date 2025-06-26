@@ -17,7 +17,7 @@ public class Book {
     private String genre;
     @NotNull(message = "Year is required")
     @PositiveOrZero(message = "Year cannot be negative")
-    private int publishedYear;
+    private Integer publishedYear;
 
     public Long getId() {
         return id;
@@ -35,7 +35,7 @@ public class Book {
         return genre;
     }
 
-    public int getPublishedYear() {
+    public Integer getPublishedYear() {
         return publishedYear;
     }
 

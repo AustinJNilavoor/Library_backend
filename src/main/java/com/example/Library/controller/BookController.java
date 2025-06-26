@@ -32,8 +32,20 @@ public class BookController {
         return repo.findAll();
     }
 
-    @GetMapping("/author/{author}")
-    public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable String author) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> getBooksById(@PathVariable Long id) {
+        Book book = repo.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Book with ID " + id + " not found"));
+        return ResponseEntity.ok(book);
+        // return repo.findById(id);
+    }
+
+    @GetMapping("/author")
+    public ResponseEntity<List<Book>> getBooksByAuthor(@RequestParam(required = false) String author) {
+        if (author == null || author.trim().isEmpty()) {
+            return ResponseEntity.ok(repo.findAll());
+        }
         List<Book> books = repo.findByAuthorIgnoreCase(author);
         if (books.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -52,10 +64,14 @@ public class BookController {
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Book with ID " + id + " not found"));
 
-        book.setTitle(updatedBook.getTitle());
-        book.setAuthor(updatedBook.getAuthor());
-        book.setGenre(updatedBook.getGenre());
-        book.setPublishedYear(updatedBook.getPublishedYear());
+        if (updatedBook.getTitle() != null)
+            book.setTitle(updatedBook.getTitle());
+        if (updatedBook.getAuthor() != null)
+            book.setAuthor(updatedBook.getAuthor());
+        if (updatedBook.getGenre() != null)
+            book.setGenre(updatedBook.getGenre());
+        if (updatedBook.getPublishedYear() != null)
+            book.setPublishedYear(updatedBook.getPublishedYear());
 
         return ResponseEntity.ok(repo.save(book));
     }
